@@ -5,7 +5,20 @@
     <title>My Flask App</title>
 </head>
 <body>
-    <form action="/submit" method="post">
+
+    {%with messages = get_flashed_messages(with_categories=True)%}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li>{{ category }}:{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <h1>Welcome to form</h1>
+    #Data kuthe pathvaycha?
+    <form action="/submit" method="post">  
 
         {{ form.hidden_tag() }}
         <p>
@@ -25,7 +38,7 @@
         <p>
             {{ form.submit() }}
         </p>
-        <p> {{form.submit()}} </p>  
+          
     </form>
 </body>
 </html>
