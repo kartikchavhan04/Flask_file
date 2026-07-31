@@ -1,3 +1,4 @@
+from click import edit
 from flask import Flask, flash ,render_template,request, url_for,redirect
 from form import MyForm
 from flask_sqlalchemy import SQLAlchemy
@@ -20,11 +21,28 @@ def index():
     items = ['apple','banana','mango']
     return render_template('index.html', items=items)
 
+@app.route('/users')
+def users():
+    users = user.query.all()
+    return render_template('users/index.html', users=users)
+
+@app.route('/users/<int:user_id>/edit')
+def edit(user_id):
+    user1 = user.query.get(user_id)
+    form = MyForm(obj=user1)
+    return render_template ('users/edit.html',  form= form, users=users)
+
 @app.route('/submit',methods =['GET','POST'])
 def submit():
     form = MyForm()
 
     if form.validate_on_submit():
+
+        new_user = user(name=form.name.data, email=form.email.data)
+        db.session.add(new_user)
+        db.session.commit()
+
+
         flash('Form submitted successfully!')
         return redirect(url_for('submit'))
     else:
