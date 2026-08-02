@@ -10,6 +10,11 @@ student = {
     "city": "Pune"
 }
 
+@app.route("/student", methods=["DELETE"])
+def delete_student():
+    student.clear()
+    return jsonify({"message": "Student deleted successfully"})
+
 @app.route("/student", methods=["PATCH"])
 def update_student():
 
@@ -19,15 +24,22 @@ def update_student():
 
     return jsonify(student)
 
+@app.route("/student", methods=["PUT"])
+def replace_student():
+    data = request.json
+    student.clear()
+    student.update(data)
+    return jsonify(student)
 
-# @app.route('/student', methods=['POST'])
-# def student():
-#     data = request.get_json()  
+@app.route('/student', methods=['POST'])
+def create_student():
+    data = request.get_json()  
 
-#     name = data['name'] 
-#     age = data['age'] 
+    name = data['name'] 
+    age = data['age'] 
 
-#     return jsonify(f"welcome unemployed {name} your age is {age} ")
+
+    return jsonify(f"welcome unemployed {name} your age is {age} ")
 
 if __name__ == '__main__':
     app.run(debug=True)

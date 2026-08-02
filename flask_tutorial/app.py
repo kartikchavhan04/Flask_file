@@ -19,18 +19,33 @@ class user(db.Model):
 @app.route('/')
 def index():
     items = ['apple','banana','mango']
-    return render_template('index.html', items=items)
+    return render_template('index.html',items=items)    
 
 @app.route('/users')
 def users():
     users = user.query.all()
-    return render_template('users/index.html', users=users)
+    form = MyForm()
+    return render_template('users/index.html', users=users , form=form)
 
-@app.route('/users/<int:user_id>/edit')
-def edit(user_id):
-    user1 = user.query.get(user_id)
+@app.route('/users/<int:id>/edit', methods=['GET', 'POST'])
+def edit_user(id):
+    user1 = user.query.get(id)
     form = MyForm(obj=user1)
-    return render_template ('users/edit.html',  form= form, users=users)
+    if form.validate_on_submit():
+        user1.name = form.name.data
+        user1.email = form.email.data
+        db.session.commit()
+        flash('User updated successfully!', 'success')
+        return redirect(url_for('users'))
+    return render_template ('users/edit.html',  form= form, user=user1)
+
+@app.route('/users/<int:id>/delete', methods=['POST'])
+def delete_user(id):
+    user1 = user.query.get(id)
+    db.session.delete(user1)
+    db.session.commit()
+    flash('User deleted successfully!', 'success')
+    return redirect(url_for('users'))
 
 @app.route('/submit',methods =['GET','POST'])
 def submit():
