@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Flask App</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <h1>Hello, World!</h1>
-    <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Image">
-     <ul>
-        {% for item in items %}
-            <li>{{ item }}</li>
-        {% endfor %}
-     </ul>
+{% block content %}
 
-     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+<h1>Hello, World!</h1>
+<img src="{{ url_for('static', filename='image/logo.png') }}" alt="Image">
+<ul>
+   {% for item in items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

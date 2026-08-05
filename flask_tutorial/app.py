@@ -15,6 +15,7 @@ class user(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
 
     profile = db.relationship('profile', backref='user', uselist=False) 
+    Blogs = db.relationship('Blog', backref='user', lazy=True)
 
 def __repr__(self):
     return f"User('{self.id}','{self.name}', '{self.email}')"
@@ -46,7 +47,9 @@ def create_user():
         new_user = user(name=form.name.data, email=form.email.data)
         db.session.add(new_user)
         db.session.commit()
-        new_profile = profile(bio='This is a sample bio', user_id=new_user.id)
+
+
+        new_profile = profile(bio=form.bio.data, user_id=new_user.id)
         db.session.add(new_profile)
         db.session.commit()
 
@@ -67,6 +70,8 @@ def edit_user(id):
     if form.validate_on_submit():
         user1.name = form.name.data
         user1.email = form.email.data
+        user1.profile.bio = form.bio.data
+        db.session.add(user1)
         db.session.commit()
         flash('User updated successfully!', 'success')
         return redirect(url_for('users'))

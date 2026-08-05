@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Flask App</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+       <a href="/">Home</a>
+       <a href="/users">Users</a>
+       <a href="/blogs">Blogs</a>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+
+     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+     <footer>
+        <p>&copy; 2024 My Flask App. All rights reserved.</p>
+     </footer>  
+</body>
+</html>

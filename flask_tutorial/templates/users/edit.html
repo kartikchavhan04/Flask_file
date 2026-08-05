@@ -36,6 +36,13 @@
             {% endfor %}
         </p>
         <p>
+            {{ form.bio.label }}<br>
+            {{ form.bio(size=32) }} <br>
+            {% for error in form.bio.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
             {{ form.submit() }}
         </p>
           

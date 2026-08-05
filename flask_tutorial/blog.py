@@ -22,8 +22,6 @@ class Blog(db.Model):
     content = db.Column(db.Text, nullable=False)
     file_name = db.Column(db.String(200), nullable=True)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
-
-    profile = db.relationship('profile', backref='blog', lazy=True)
     def __repr__(self):
         return f"Blog('{self.id}', '{self.title}', '{self.date_posted}', '{self.content}')"
 
@@ -53,10 +51,6 @@ def create_blog():
             
         new_blog = Blog (title=title, content=content, file_name=filename)
         db.session.add(new_blog)
-        db.session.commit()
-
-        new_profile = profile(bio='This is a sample bio', user_id=new_blog.id)
-        db.session.add(new_profile)
         db.session.commit()
         flash('Blog post created successfully!', 'success')
         return redirect(url_for('blogs'))
