@@ -9,6 +9,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key '
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
+
+
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
@@ -32,6 +34,7 @@ def load_user(user_id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    # flash ("Your massage here", "success")
     form = RegisterForm()
    
     if form.validate_on_submit():

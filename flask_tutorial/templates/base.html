@@ -7,11 +7,22 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav>
-       <a href="/">Home</a>
-       <a href="/users">Users</a>
-       <a href="/blogs">Blogs</a>
-    </nav>
+   <nav>
+      <a href="/">Home</a>
+      <a href="/users">Users</a>
+      <a href="/blogs">Blogs</a>
+   </nav>
+
+   {%with massages = get_flashed_massages(with_categories)%}
+     {%if massages %}
+       {%for category, massage in massages%}
+          <div class = "alert alert-{{category}} alert-dismissible fade show" role="alert" >
+            {{category}}: {{massage}}
+          </div>
+         {%endfor%}
+      {%endif%}
+   {% endwith %}
+     
 
     {% block content %}{% endblock %}
 
