@@ -5,17 +5,18 @@ from wtforms import (
     DateField,
     SelectField,
     TextAreaField,
-    SubmitField
+    SubmitField,
 )
 
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, EqualTo, Length,Regexp
+from wtforms import PasswordField
 
 
 class StudentForm(FlaskForm):
 
     roll_no = StringField(
         "Roll Number",
-        validators=[DataRequired()]
+        validators=[DataRequired(),Length(max=10)]
     )
 
     first_name = StringField(
@@ -35,7 +36,7 @@ class StudentForm(FlaskForm):
 
     phone = StringField(
         "Phone",
-        validators=[DataRequired()]
+        validators=[DataRequired(),Length(min=10,max=10)]
     )
 
     gender = SelectField(
@@ -47,14 +48,34 @@ class StudentForm(FlaskForm):
         ]
     )
 
-    dob = DateField(
-        "Date of Birth",
-        validators=[DataRequired()]
+
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired(),
+            Length(min=6)
+        ]
     )
 
-    address = TextAreaField(
-        "Address",
-        validators=[DataRequired()]
+    confirm_password = PasswordField(
+        'Confirm Password', 
+        validators=[DataRequired(), EqualTo('password', message='Passwords must match')]
     )
+
 
     submit = SubmitField("Add Student")
+
+class LoginForm(FlaskForm):
+
+    email = EmailField(
+        "Email",
+        validators=[DataRequired(), Email()]
+    )
+
+    password = PasswordField(
+        "Password",
+        validators=[DataRequired()]
+    )
+    
+    submit = SubmitField("Login")
+

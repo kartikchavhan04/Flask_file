@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+</head>
+
+<body>
+
+    <h1>Student Profile</h1>
+
+    <p><strong>Roll No:</strong> {{ student.roll_no }}</p>
+
+    <p><strong>First Name:</strong> {{ student.first_name }}</p>
+
+    <p><strong>Last Name:</strong> {{ student.last_name }}</p>
+
+    <p><strong>Email:</strong> {{ student.email }}</p>
+
+    <p><strong>Phone:</strong> {{ student.phone }}</p>
+
+    <p><strong>Gender:</strong> {{ student.gender }}</p>
+
+    <a href="{{ url_for('logout') }}">
+        <button type="button">Logout</button>
+    </a>
+    <a href="{{ url_for('students') }}">
+        <button type="button">View Student</button>
+    </a>
+    
+
+</body>
+</html>

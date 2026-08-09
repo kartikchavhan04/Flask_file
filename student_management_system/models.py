@@ -13,8 +13,6 @@ class Student(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     phone = db.Column(db.String(15), nullable=False)
     gender = db.Column(db.String(10), nullable=False)
-    dob = db.Column(db.Date, nullable=False)
-    address = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     password = db.Column(db.String(255), nullable=False)
 
