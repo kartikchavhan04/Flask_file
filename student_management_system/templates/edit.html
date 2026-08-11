@@ -1,90 +1,279 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Student</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+
+{% block title %}
+Edit Student - Student Management System
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/add_student.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="student-section">
 
     <div class="container">
 
-    <h1>Add Student</h1>
 
-    <a href="{{ url_for('home') }}">Home</a>
+        <!-- HEADER -->
 
-|
+        <div class="student-page-header">
 
+            <div>
 
-    <a href="{{ url_for('login') }}">Login</a>
+                <span class="page-badge">
+                    Student Management
+                </span>
 
-<br><br>
+                <h1>Edit Student</h1>
 
-    <form method="POST">
+                <p>
+                    Update your student information and account details.
+                </p>
 
-        {{ form.hidden_tag() }}
-
-        <div class="form-row">
-
-            <div class="form-group">
-                {{ form.first_name.label }}
-                {{ form.first_name() }}
-            </div>
-
-            <div class="form-group">
-                {{ form.last_name.label }}
-                {{ form.last_name() }}
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="form-group">
-                {{ form.roll_no.label }}
-                {{ form.roll_no() }}
-            </div>
-
-            <div class="form-group">
-                {{ form.email.label }}
-                {{ form.email() }}
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="form-group">
-                {{ form.phone.label }}
-                {{ form.phone() }}
-            </div>
-
-            <div class="form-group">
-                {{ form.gender.label }}
-                {{ form.gender() }}
-            </div>
-
-        </div>
-
-        <div class="form-row">
-
-            <div class="form-group">
-            {{ form.password.label }}<br>
-            {{ form.password(size = 32) }}
-            </div>
-
-            <div class="form-group">
-            {{ form.confirm_password.label }}<br>
-            {{ form.confirm_password(size=32) }}
             </div>
 
         </div>
 
 
-        {{ form.submit() }}
 
-    </form>
+        <!-- FORM CARD -->
 
-</div>
+        <div class="student-form-card">
 
-</body>
-</html>
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+
+
+                <!-- ROW 1 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.first_name.label }}
+
+                        {{ form.first_name(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.first_name.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.last_name.label }}
+
+                        {{ form.last_name(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.last_name.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ROW 2 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.roll_no.label }}
+
+                        {{ form.roll_no(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.roll_no.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.email.label }}
+
+                        {{ form.email(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.email.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ROW 3 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.phone.label }}
+
+                        {{ form.phone(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.phone.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.gender.label }}
+
+                        {{ form.gender(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.gender.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD ROW -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            New Password
+                            <span class="optional">
+                                (Optional)
+                            </span>
+                        </label>
+
+                        {{ form.password(
+                            class="form-control",
+                            placeholder="Enter new password"
+                        ) }}
+
+                        {% for error in form.password.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Confirm New Password
+                            <span class="optional">
+                                (Optional)
+                            </span>
+                        </label>
+
+                        {{ form.confirm_password(
+                            class="form-control",
+                            placeholder="Confirm new password"
+                        ) }}
+
+                        {% for error in form.confirm_password.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="form-actions">
+
+
+                    <a href="{{ url_for('profile') }}"
+                       class="btn btn-light">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Update Student
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

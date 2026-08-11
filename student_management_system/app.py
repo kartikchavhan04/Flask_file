@@ -3,7 +3,7 @@ from flask import session
 from functools import wraps
 from extensions import db
 from config import Config
-from forms import StudentForm, LoginForm
+from forms import StudentForm, LoginForm,EditStudentForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin,LoginManager,login_user,current_user,logout_user
 
@@ -38,7 +38,26 @@ def add_student():
     form = StudentForm()
 
     if form.validate_on_submit():
-        hashed_password = generate_password_hash(form.password.data)
+
+        existing_student = Student.query.filter_by(
+            email=form.email.data
+        ).first()
+
+        if existing_student:
+
+            flash(
+                "This email is already registered.",
+                "danger"
+            )
+
+            return render_template(
+                "add_student.html",
+                form=form
+            )
+
+        hashed_password = generate_password_hash(
+            form.password.data
+        )
 
         student = Student(
             roll_no=form.roll_no.data,
@@ -48,18 +67,22 @@ def add_student():
             phone=form.phone.data,
             gender=form.gender.data,
             password=hashed_password
-
         )
-        student.set_password(form.password.data)
+
         db.session.add(student)
         db.session.commit()
 
-        flash("Student Added Successfully!", "success")
+        flash(
+            "Student Added Successfully!",
+            "success"
+        )
 
         return redirect(url_for("login"))
 
-    return render_template("add_student.html", form=form)
-
+    return render_template(
+        "add_student.html",
+        form=form
+    )
 @app.route("/students")
 @login_required
 def students():
@@ -75,14 +98,9 @@ def students():
 @login_required
 def edit_student(id):
 
-    # फक्त स्वतःचा student edit करू शकतो
-    if id != session["student_id"]:
-        flash("You can edit only your own information.", "danger")
-        return redirect(url_for("students"))
-
     student = Student.query.get_or_404(id)
 
-    form = StudentForm(obj=student)
+    form = EditStudentForm(obj=student)
 
     if form.validate_on_submit():
 
@@ -93,36 +111,41 @@ def edit_student(id):
         student.phone = form.phone.data
         student.gender = form.gender.data
 
+        # Password only when user enters a new password
+        if form.password.data:
+
+            student.set_password(form.password.data)
+
         db.session.commit()
 
-        flash("Your information updated successfully.", "success")
+        flash("Student Updated Successfully!", "success")
 
-        return redirect(url_for("students"))
+        return redirect(url_for("profile"))
 
     return render_template(
         "edit.html",
         form=form
     )
+
 @app.route("/delete-student/<int:id>")
 @login_required
 def delete_student(id):
 
-    # फक्त स्वतःचा student delete करू शकतो
+    # Logged-in student only
     if id != session["student_id"]:
-        flash("You can delete only your own information.", "danger")
-        return redirect(url_for("students"))
+        flash("You can delete only your own account.", "danger")
+        return redirect(url_for("profile"))
 
     student = Student.query.get_or_404(id)
 
     db.session.delete(student)
     db.session.commit()
 
-    # Logout because current student account is deleted
     session.pop("student_id", None)
 
     flash("Your account has been deleted successfully.", "success")
 
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -157,13 +180,16 @@ def login():
 @login_required
 def profile():
 
-    student_id = session.get("student_id")
+    student = Student.query.get_or_404(
+        session["student_id"]
+    )
 
-    student = Student.query.get_or_404(student_id)
+    students_count = Student.query.count()
 
     return render_template(
         "profile.html",
-        student=student
+        student=student,
+        students_count=students_count
     )
 
 @app.route("/logout")

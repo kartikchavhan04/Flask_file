@@ -6,10 +6,11 @@ from wtforms import (
     SelectField,
     TextAreaField,
     SubmitField,
+    PasswordField
 )
 
-from wtforms.validators import DataRequired, Email, EqualTo, Length,Regexp
-from wtforms import PasswordField
+from wtforms.validators import DataRequired, Email, EqualTo, Length,Regexp,Optional
+
 
 
 class StudentForm(FlaskForm):
@@ -79,3 +80,67 @@ class LoginForm(FlaskForm):
     
     submit = SubmitField("Login")
 
+
+class EditStudentForm(FlaskForm):
+
+    roll_no = StringField(
+        "Roll Number",
+        validators=[DataRequired()]
+    )
+
+    first_name = StringField(
+        "First Name",
+        validators=[DataRequired()]
+    )
+
+    last_name = StringField(
+        "Last Name",
+        validators=[DataRequired()]
+    )
+
+    email = StringField(
+        "Email",
+        validators=[DataRequired(), Email()]
+    )
+
+    phone = StringField(
+        "Phone",
+        validators=[
+            DataRequired(),
+            Regexp(
+                r"^[0-9]{10}$",
+                message="Phone number must be exactly 10 digits"
+            )
+        ]
+    )
+
+    gender = SelectField(
+        "Gender",
+        choices=[
+            ("Male", "Male"),
+            ("Female", "Female"),
+            ("Other", "Other")
+        ],
+        validators=[DataRequired()]
+    )
+
+    password = PasswordField(
+        "New Password",
+        validators=[
+            Optional(),
+            Length(min=6)
+        ]
+    )
+
+    confirm_password = PasswordField(
+        "Confirm New Password",
+        validators=[
+            Optional(),
+            EqualTo(
+                "password",
+                message="Passwords must match"
+            )
+        ]
+    )
+
+    submit = SubmitField("Update Student")

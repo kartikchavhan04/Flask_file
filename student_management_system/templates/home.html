@@ -1,19 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Management System</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>Student Management System</h1>
+{% block title %}
+Home - Student Management System
+{% endblock %}
 
-    <a href="{{ url_for('add_student') }}">
-        <button>Register Student</button>
-    </a>
-     <br></br>
-    <a href="{{ url_for('login') }}">
-        <button>Login Student</button>
-    </a>
+{% block extra_css %}
 
-</body>
-</html>
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/home.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-75">
+
+            <!-- LEFT CONTENT -->
+
+            <div class="col-lg-7">
+
+                <div class="hero-content">
+
+                    <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2">
+                        Student Management Platform
+                    </span>
+
+                    <h1 class="hero-title">
+                        Manage Students
+                        <span>Smarter & Easier.</span>
+                    </h1>
+
+                    <p class="hero-text">
+                        A simple and secure platform to manage student
+                        information, profiles and academic records
+                        efficiently.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="{{ url_for('add_student') }}"
+                           class="btn btn-primary btn-lg px-4">
+
+                            <i class="bi bi-person-plus-fill"></i>
+                            Register Student
+
+                        </a>
+
+                        <a href="{{ url_for('login') }}"
+                           class="btn btn-outline-dark btn-lg px-4">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Login
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT CARD -->
+
+            <div class="col-lg-5">
+
+                <div class="hero-card">
+
+                    <div class="icon-box">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+
+                    <h3>
+                        Student Management
+                    </h3>
+
+                    <p>
+                        Manage student information from one
+                        centralized system.
+                    </p>
+
+                    <div class="feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Student Information</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Secure Login</span>
+                    </div>
+
+                    <div class="feature">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Easy Profile Management</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
