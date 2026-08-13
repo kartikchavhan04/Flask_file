@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-# MySQL Database Configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = (
     "mysql+pymysql://root:Bharat123@localhost/college"
 )
@@ -14,9 +13,6 @@ app.config["SQLALCHEMY_ECHO"] = True
 db = SQLAlchemy(app)
 
 
-# =========================
-# EMPLOYEE MODEL
-# =========================
 
 class Employee(db.Model):
     __tablename__ = "employee"
@@ -28,9 +24,6 @@ class Employee(db.Model):
     salary = db.Column(db.Integer)
 
 
-# =========================
-# GET ALL EMPLOYEES
-# =========================
 
 @app.route("/employees", methods=["GET"])
 def get_employees():
@@ -48,10 +41,6 @@ def get_employees():
         for e in employees
     ])
 
-
-# =========================
-# CREATE EMPLOYEE
-# =========================
 
 @app.route("/employee", methods=["POST"])
 def save_employee():
@@ -71,10 +60,6 @@ def save_employee():
         "id": employee.id
     }
 
-
-# =========================
-# UPDATE EMPLOYEE
-# =========================
 
 @app.route("/employee/<int:id>", methods=["PUT"])
 def update_employee(id):
@@ -111,10 +96,6 @@ def update_employee(id):
     })
 
 
-# =========================
-# DELETE EMPLOYEE
-# =========================
-
 @app.route("/employee/<int:id>", methods=["DELETE"])
 def delete_employee(id):
 
@@ -134,25 +115,9 @@ def delete_employee(id):
     })
 
 
-# =========================
-# CREATE DATABASE TABLE
-# =========================
-
 if __name__ == "__main__":
 
     with app.app_context():
         db.create_all()
-
-    print("\n========== REGISTERED ENDPOINTS ==========")
-
-    for rule in app.url_map.iter_rules():
-
-        methods = ", ".join(
-            sorted(rule.methods - {"HEAD", "OPTIONS"})
-        )
-
-        print(f"{methods:10} {rule}")
-
-    print("==========================================\n")
-
+        
     app.run(debug=True)
