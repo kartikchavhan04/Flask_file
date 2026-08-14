@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Edit Student - Student Management System
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/add_student.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="student-section">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="student-page-header">
+
+            <div>
+
+                <span class="page-badge">
+                    Student Management
+                </span>
+
+                <h1>Edit Student</h1>
+
+                <p>
+                    Update your student information and account details.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FORM CARD -->
+
+        <div class="student-form-card">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+
+
+                <!-- ROW 1 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.first_name.label }}
+
+                        {{ form.first_name(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.first_name.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.last_name.label }}
+
+                        {{ form.last_name(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.last_name.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ROW 2 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.roll_no.label }}
+
+                        {{ form.roll_no(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.roll_no.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.email.label }}
+
+                        {{ form.email(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.email.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ROW 3 -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        {{ form.phone.label }}
+
+                        {{ form.phone(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.phone.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        {{ form.gender.label }}
+
+                        {{ form.gender(
+                            class="form-control"
+                        ) }}
+
+                        {% for error in form.gender.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                <!-- PROFILE PHOTO -->
+
+<div class="form-row">
+
+    <div class="form-group">
+
+        {{ form.profile_photo.label }}
+
+        {{ form.profile_photo(
+            class="form-control"
+        ) }}
+
+        {% for error in form.profile_photo.errors %}
+
+            <div class="field-error">
+                {{ error }}
+            </div>
+
+        {% endfor %}
+
+        <small class="form-help">
+            JPG, JPEG or PNG only. Maximum size 2 MB.
+        </small>
+
+    </div>
+
+</div>
+
+
+
+                <!-- PASSWORD ROW -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            New Password
+                            <span class="optional">
+                                (Optional)
+                            </span>
+                        </label>
+
+                        {{ form.password(
+                            class="form-control",
+                            placeholder="Enter new password"
+                        ) }}
+
+                        {% for error in form.password.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Confirm New Password
+                            <span class="optional">
+                                (Optional)
+                            </span>
+                        </label>
+
+                        {{ form.confirm_password(
+                            class="form-control",
+                            placeholder="Confirm new password"
+                        ) }}
+
+                        {% for error in form.confirm_password.errors %}
+
+                            <div class="field-error">
+                                {{ error }}
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="form-actions">
+
+
+                    <a href="{{ url_for('profile') }}"
+                       class="btn btn-light">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="btn btn-primary">
+
+                        Update Student
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

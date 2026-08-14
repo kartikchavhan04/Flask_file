@@ -1,0 +1,647 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Student Dashboard
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="dashboard">
+
+
+    <!-- =========================================
+         SIDEBAR
+         ========================================= -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+
+            <div class="logo-text">
+
+                <strong>Student</strong>
+
+                <span>Management</span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="{{ url_for('profile') }}"
+               class="nav-item active">
+
+                <i class="bi bi-grid-fill"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="{{ url_for('students') }}"
+               class="nav-item">
+
+                <i class="bi bi-people-fill"></i>
+
+                <span>Students</span>
+
+            </a>
+
+
+        </nav>
+
+
+
+        <!-- SIDEBAR BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-user">
+
+                <div class="sidebar-avatar">
+
+                    <i class="bi bi-person-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ student.first_name }}
+                    </strong>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN DASHBOARD
+         ========================================= -->
+
+    <div class="dashboard-main">
+
+
+        <!-- =====================================
+             TOPBAR
+             ===================================== -->
+
+        <header class="dashboard-topbar">
+
+
+            <div class="topbar-left">
+
+                <span class="topbar-small">
+                    Student Management System
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+
+            <!-- PROFILE MENU -->
+
+            <div class="profile-menu">
+
+
+                <button type="button"
+                        class="profile-avatar"
+                        onclick="toggleProfileMenu()">
+
+                    <i class="bi bi-person-fill"></i>
+
+                </button>
+
+
+
+                <!-- DROPDOWN -->
+
+                <div class="profile-dropdown"
+                     id="profileDropdown">
+
+
+                    <div class="dropdown-user">
+
+                        <div class="dropdown-avatar">
+
+                            <i class="bi bi-person-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                {{ student.first_name }}
+                                {{ student.last_name }}
+                            </strong>
+
+                            <span>
+                                {{ student.email }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dropdown-divider"></div>
+
+
+
+                    <!-- EDIT -->
+
+                    <a href="{{ url_for('edit_student', id=student.id) }}"
+                       class="dropdown-item">
+
+                        <i class="bi bi-pencil-square"></i>
+
+                        <span>
+                            Edit Profile
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- DELETE -->
+
+                    <a href="{{ url_for('delete_student', id=student.id) }}"
+                       class="dropdown-item delete-item"
+                       onclick="return confirm('Are you sure you want to delete your account?');">
+
+                        <i class="bi bi-trash3"></i>
+
+                        <span>
+                            Delete Account
+                        </span>
+
+                    </a>
+
+
+
+                    <div class="dropdown-divider"></div>
+
+
+
+                    <!-- LOGOUT -->
+
+                    <a href="{{ url_for('logout') }}"
+                       class="dropdown-item logout-item">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        <span>
+                            Logout
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             DASHBOARD CONTENT
+             ===================================== -->
+
+        <section class="dashboard-content">
+
+
+            <!-- WELCOME CARD -->
+
+            <div class="welcome-card">
+
+
+                <div class="welcome-content">
+
+                    <span class="welcome-label">
+                        STUDENT DASHBOARD
+                    </span>
+
+
+                    <h2>
+
+                        Welcome back,
+                        {{ student.first_name }}
+                        {{ student.last_name }} 👋
+
+                    </h2>
+
+
+                    <p>
+
+                        Manage your student information
+                        and account from one place.
+
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-icon">
+
+                    <i class="bi bi-mortarboard-fill"></i>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 STAT CARDS
+                 ================================= -->
+
+            <div class="dashboard-cards">
+
+
+                <!-- TOTAL STUDENTS -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon blue">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <span>
+                            Total Students
+                        </span>
+
+                        <strong>
+                            {{ students_count }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MY PROFILE -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon purple">
+
+                        <i class="bi bi-person-check-fill"></i>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <span>
+                            My Profile
+                        </span>
+
+                        <strong>
+                            Active
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACCOUNT -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon green">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                    <div class="card-details">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <strong>
+                            Active
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 STUDENT INFORMATION
+                 ================================= -->
+
+            <div class="dashboard-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Student Information
+                        </h2>
+
+                        <p>
+                            Your registered account information
+                        </p>
+
+                    </div>
+
+
+                    <a href="{{ url_for('edit_student', id=student.id) }}"
+                       class="edit-profile-btn">
+
+                        <i class="bi bi-pencil"></i>
+
+                        Edit Profile
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- INFORMATION GRID -->
+
+                <div class="info-grid">
+
+
+                    <!-- ROLL NUMBER -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-hash"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Roll Number
+                            </span>
+
+                            <strong>
+                                {{ student.roll_no }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FIRST NAME -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-person"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                First Name
+                            </span>
+
+                            <strong>
+                                {{ student.first_name }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LAST NAME -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-person"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Last Name
+                            </span>
+
+                            <strong>
+                                {{ student.last_name }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-envelope"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Email Address
+                            </span>
+
+                            <strong>
+                                {{ student.email }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-telephone"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Phone Number
+                            </span>
+
+                            <strong>
+                                {{ student.phone }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- GENDER -->
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+
+                            <i class="bi bi-gender-ambiguous"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Gender
+                            </span>
+
+                            <strong>
+                                {{ student.gender }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     PROFILE DROPDOWN JAVASCRIPT
+     ========================================= -->
+
+<script>
+
+function toggleProfileMenu() {
+
+    const dropdown =
+        document.getElementById("profileDropdown");
+
+    dropdown.classList.toggle("show");
+
+}
+
+
+document.addEventListener("click", function(event) {
+
+    const menu =
+        document.querySelector(".profile-menu");
+
+    const dropdown =
+        document.getElementById("profileDropdown");
+
+
+    if (
+        menu &&
+        !menu.contains(event.target)
+    ) {
+
+        dropdown.classList.remove("show");
+
+    }
+
+});
+
+</script>
+
+
+{% endblock %}
