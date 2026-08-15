@@ -1,0 +1,141 @@
+/* =========================================================
+   TODO APP - FOOTER CSS
+========================================================= */
+
+
+/* =========================================================
+   1. FOOTER
+========================================================= */
+
+.footer {
+    background: #111827;
+
+    color: #aeb7c7;
+
+    padding-top: 60px;
+}
+
+
+/* =========================================================
+   2. FOOTER CONTAINER
+========================================================= */
+
+.footer-container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 0 20px 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 60px;
+}
+
+
+/* =========================================================
+   3. FOOTER SECTION
+========================================================= */
+
+.footer-section h2 {
+    margin: 0 0 15px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+}
+
+
+.footer-section h3 {
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+
+.footer-section p {
+    margin: 8px 0;
+
+    line-height: 1.7;
+
+    color: #9da8ba;
+}
+
+
+/* =========================================================
+   4. FOOTER LINKS
+========================================================= */
+
+.footer-section a {
+    display: block;
+
+    margin: 10px 0;
+
+    color: #9da8ba;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   5. FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+    padding: 20px;
+
+    border-top: 1px solid #252d3b;
+
+    text-align: center;
+}
+
+
+.footer-bottom p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #7f8a9d;
+}
+
+
+/* =========================================================
+   6. RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 40px;
+    }
+
+}
+
+
+/* =========================================================
+   7. RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+}

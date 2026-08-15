@@ -1,0 +1,408 @@
+/* =========================================================
+   TODO APP - EDIT TASK CSS
+========================================================= */
+
+
+/* =========================================================
+   1. EDIT PAGE
+========================================================= */
+
+.edit-page {
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 70px 20px;
+}
+
+
+/* =========================================================
+   2. EDIT CARD
+========================================================= */
+
+.edit-card {
+    width: 100%;
+
+    max-width: 600px;
+
+    padding: 40px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e6ef;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 40px rgba(30, 50, 90, 0.08);
+}
+
+
+/* =========================================================
+   3. EDIT HEADER
+========================================================= */
+
+.edit-header {
+    margin-bottom: 30px;
+}
+
+
+.edit-header h1 {
+    margin: 0 0 8px;
+
+    color: #151b2d;
+
+    font-size: 30px;
+
+    font-weight: 800;
+}
+
+
+.edit-header p {
+    margin: 0;
+
+    color: #7a8496;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   4. FORM GROUP
+========================================================= */
+
+.edit-card .form-group {
+    margin-bottom: 25px;
+}
+
+
+.edit-card label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #29344b;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   5. INPUT
+========================================================= */
+
+.edit-card input,
+.edit-card textarea,
+.edit-card select {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #d5dce7;
+
+    border-radius: 8px;
+
+    color: #1f2937;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.edit-card input::placeholder,
+.edit-card textarea::placeholder {
+    color: #9ca3af;
+}
+
+
+.edit-card input:focus,
+.edit-card textarea:focus,
+.edit-card select:focus {
+    border-color: #2864e8;
+
+    box-shadow:
+        0 0 0 3px rgba(40, 100, 232, 0.1);
+}
+
+
+/* =========================================================
+   6. DESCRIPTION
+========================================================= */
+
+.edit-card textarea {
+    min-height: 140px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   7. STATUS SELECT
+========================================================= */
+
+.edit-card select {
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* =========================================================
+   8. EDIT ACTIONS
+========================================================= */
+
+.edit-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+
+/* =========================================================
+   9. CANCEL BUTTON
+========================================================= */
+
+.cancel-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 11px 22px;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    background: #eef1f5;
+
+    color: #4e5b70;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.cancel-btn:hover {
+    background: #e2e6eb;
+
+    color: #374151;
+}
+
+
+.cancel-btn:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   10. UPDATE BUTTON
+========================================================= */
+
+.update-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 11px 22px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2864e8;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.update-btn:hover {
+    background: #1852d0;
+
+    box-shadow:
+        0 4px 12px rgba(40, 100, 232, 0.20);
+}
+
+
+.update-btn:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   11. DELETE SECTION
+========================================================= */
+
+.edit-danger-zone {
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+.edit-danger-zone h3 {
+    margin: 0 0 6px;
+
+    color: #b91c1c;
+
+    font-size: 17px;
+}
+
+
+.edit-danger-zone p {
+    margin: 0 0 15px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   12. DELETE BUTTON
+========================================================= */
+
+.edit-delete-btn {
+    min-height: 42px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #dc3545;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
+}
+
+
+.edit-delete-btn:hover {
+    background: #bb2d3b;
+}
+
+
+.edit-delete-btn:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   13. RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .edit-page {
+        padding: 40px 15px;
+    }
+
+
+    .edit-card {
+        padding: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   14. RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .edit-page {
+        padding: 25px 12px;
+    }
+
+
+    .edit-card {
+        padding: 25px 20px;
+
+        border-radius: 12px;
+    }
+
+
+    .edit-header h1 {
+        font-size: 25px;
+    }
+
+
+    .edit-actions {
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .cancel-btn,
+    .update-btn {
+        width: 100%;
+    }
+
+
+    .edit-delete-btn {
+        width: 100%;
+    }
+
+}

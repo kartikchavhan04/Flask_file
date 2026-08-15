@@ -1,0 +1,134 @@
+/* =========================================================
+   TODO APP - AUTHENTICATION CSS
+   Login + Register
+========================================================= */
+
+
+/* =========================================================
+   1. AUTH CONTAINER
+========================================================= */
+
+.auth-container {
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================================
+   2. AUTH CARD
+========================================================= */
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 35px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 35px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================================
+   3. AUTH TITLE
+========================================================= */
+
+.auth-card h1 {
+    margin-bottom: 6px;
+
+    color: #111827;
+
+    text-align: center;
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   4. AUTH SUBTITLE
+========================================================= */
+
+.auth-subtitle {
+    margin-bottom: 28px;
+
+    color: #64748b;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   5. AUTH FOOTER
+========================================================= */
+
+.auth-footer {
+    margin-top: 22px;
+
+    color: #64748b;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.auth-footer a {
+    color: #2563eb;
+
+    font-weight: 700;
+}
+
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   6. AUTH FORM
+========================================================= */
+
+.auth-card .form-group {
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   7. RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .auth-container {
+        padding: 25px 12px;
+    }
+
+
+    .auth-card {
+        padding: 25px 20px;
+
+        border-radius: 10px;
+    }
+
+
+    .auth-card h1 {
+        font-size: 23px;
+    }
+
+}

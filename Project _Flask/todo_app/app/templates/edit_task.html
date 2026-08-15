@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Edit Task - Todo App
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/edit_task.css') }}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="edit-page">
+
+    <div class="edit-card">
+
+        <div class="edit-header">
+
+            <h1>
+                Edit Task
+            </h1>
+
+            <p>
+                Update your task details.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('tasks.update_task', task_id=task.id) }}"
+        >
+
+            <div class="form-group">
+
+                <label for="title">
+                    Task
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    value="{{ task.title }}"
+                    maxlength="100"
+                    required
+                >
+
+            </div>
+
+
+            <div class="edit-actions">
+
+                <a
+                    href="{{ url_for('tasks.task_list') }}"
+                    class="cancel-btn"
+                >
+                    Cancel
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="update-btn"
+                >
+                    Update Task
+                </button>
+
+            </div>
+
+        </form>
+
+        <div class="danger-zone">
+
+    <h3>Delete Task</h3>
+
+    <p>
+        This action cannot be undone.
+    </p>
+
+    <form
+        method="POST"
+        action="{{ url_for('tasks.delete_task', task_id=task.id) }}"
+        onsubmit="return confirm('Are you sure you want to delete this task?');"
+    >
+
+        <button
+            type="submit"
+            class="btn btn-danger"
+        >
+            Delete Task
+        </button>
+
+    </form>
+
+</div>
+
+    </div>
+
+</div>
+
+{% endblock %}
