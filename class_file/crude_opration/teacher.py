@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 
 
 
-class Employee(db.Model):
+class Teacher(db.Model):
     __tablename__ = "employee"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -25,48 +25,48 @@ class Employee(db.Model):
 
 
 
-@app.route("/employees", methods=["GET"])
-def get_employees():
+@app.route("/teacher", methods=["GET"])
+def get_teacher():
 
-    employees = Employee.query.all()
+    teachers = Teacher.query.all()
 
     return jsonify([
         {
-            "id": e.id,
-            "name": e.name,
-            "email": e.email,
-            "department": e.department,
-            "salary": e.salary
+            "id": t.id,
+            "name": t.name,
+            "email": t.email,
+            "subject": t.department,
+            "salary": t.salary
         }
-        for e in employees
+        for t in teachers
     ])
 
 
-@app.route("/employee", methods=["POST"])
-def save_employee():
+@app.route("/teacher", methods=["POST"])
+def save_teacher():
 
-    employee = Employee(
+    teacher = Teacher(
         name="Rahul",
         email="rahul@gmail.com",
-        department="IT",
+        subject="mathmatics",
         salary=50000
     )
 
-    db.session.add(employee)
+    db.session.add(teacher)
     db.session.commit()
 
     return {
         "message": "Employee saved successfully",
-        "id": employee.id
+        "id": teacher.id
     }
 
 
-@app.route("/employee/<int:id>", methods=["PUT"])
-def update_employee(id):
+@app.route("/teacher/<int:id>", methods=["PUT"])
+def update_teacher(id):
 
-    employee = db.session.get(Employee, id)
+    teacher = db.session.get(Teacher, id)
 
-    if employee is None:
+    if teacher is None:
         return jsonify({
             "message": "Employee not found"
         }), 404
