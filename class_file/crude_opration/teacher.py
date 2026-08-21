@@ -15,12 +15,12 @@ db = SQLAlchemy(app)
 
 
 class Teacher(db.Model):
-    __tablename__ = "employee"
+    __tablename__ = "teacher"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True)
-    department = db.Column(db.String(100))
+    subject = db.Column(db.String(100))
     salary = db.Column(db.Integer)
 
 
@@ -35,12 +35,33 @@ def get_teacher():
             "id": t.id,
             "name": t.name,
             "email": t.email,
-            "subject": t.department,
+            "subject": t.subject,
             "salary": t.salary
         }
         for t in teachers
     ])
 
+
+
+    
+@app.route("/teacher",methods=["POST"])
+def create_teacher():
+    data = request.get_json()
+    
+    if not data:
+        return jsonify({"massage": "NO input data Provided"}),400
+    
+    teacher = Teacher(
+        name = data.get('name'),
+        email = data.get('email'),
+        subject = data.get('subject'),
+        salary = data.get('salary')
+    )
+    
+    db.session.add(teacher)
+    db.session.commit()
+    
+    return jsonify({"massage": "Teacher data saved successfully !"})
 
 @app.route("/teacher", methods=["POST"])
 def save_teacher():
@@ -56,7 +77,7 @@ def save_teacher():
     db.session.commit()
 
     return {
-        "message": "Employee saved successfully",
+        "message": "Teacher saved successfully",
         "id": teacher.id
     }
 
@@ -68,49 +89,49 @@ def update_teacher(id):
 
     if teacher is None:
         return jsonify({
-            "message": "Employee not found"
+            "message": "Teacher not found"
         }), 404
 
     data = request.get_json()
 
-    employee.name = data.get("name", employee.name)
-    employee.email = data.get("email", employee.email)
-    employee.department = data.get(
-        "department",
-        employee.department
+    teacher.name = data.get("name", teacher.name)
+    teacher.email = data.get("email", teacher.email)
+    teacher.subject = data.get(
+        "subject",
+        teacher.subject
     )
-    employee.salary = data.get(
+    teacher.salary = data.get(
         "salary",
-        employee.salary
+        teacher.salary
     )
 
     db.session.commit()
 
     return jsonify({
-        "message": "Employee updated successfully",
-        "id": employee.id,
-        "name": employee.name,
-        "email": employee.email,
-        "department": employee.department,
-        "salary": employee.salary
+        "message": "Teacher updated successfully",
+        "id": teacher.id,
+        "name": teacher.name,
+        "email": teacher.email,
+        "subject": teacher.subject,
+        "salary": teacher.salary
     })
 
 
-@app.route("/employee/<int:id>", methods=["DELETE"])
-def delete_employee(id):
+@app.route("/teacher/<int:id>", methods=["DELETE"])
+def delete_teacher(id):
 
-    employee = db.session.get(Employee, id)
+    teacher = db.session.get(Teacher, id)
 
-    if employee is None:
+    if teacher is None:
         return jsonify({
-            "message": "Employee not found"
+            "message": "Teacher not found"
         }), 404
 
-    db.session.delete(employee)
+    db.session.delete(teacher)
     db.session.commit()
 
     return jsonify({
-        "message": "Employee deleted successfully",
+        "message": "Teacher deleted successfully",
         "id": id
     })
 
