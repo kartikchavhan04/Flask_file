@@ -55,7 +55,7 @@ def create_task():
 
     task = Task(
         title=data["title"],
-        description=data.get("description"),
+        description=data("description"),
         status=data["status"],
         priority=data["priority"],
         due_date=(
@@ -63,7 +63,7 @@ def create_task():
                 data["due_date"],
                 "%Y-%m-%d"
             ).date()
-            if data.get("due_date")
+            if data("due_date")
             else None
         )
     )
